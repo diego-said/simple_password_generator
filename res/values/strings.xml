@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple Password Generator</string>
+    <string name="letters">Letters</string>
+    <string name="numbers">Numbers</string>
+    <string name="special_chars">Special characters</string>
+    <string name="length">Length</string>
+    <string name="quantity">Quantity</string>
+    <string name="generate">Generate</string>
+    <string name="copy">Copy</string>
+    <string name="copy_all">Copy All</string>
+    <string name="copy_message">Passwords copied</string>
+
+</resources>
