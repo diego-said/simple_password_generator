@@ -120,7 +120,7 @@ public class ResultPasswordsActivity extends Activity {
 
 	public void copyAllClickHandler(View view) {
 		switch (view.getId()) {
-		case R.id.buttonCopyAll:
+		case R.id.buttonCopy:
 			StringBuilder memory = new StringBuilder();
 
 			for (CheckBox checkBox : checkBoxMap.values()) {

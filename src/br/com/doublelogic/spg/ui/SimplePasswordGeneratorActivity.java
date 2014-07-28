@@ -1,99 +1,89 @@
 package br.com.doublelogic.spg.ui;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.EditText;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import br.com.doublelogic.spg.R;
-import br.com.doublelogic.spg.bean.PasswordSettings;
-import br.com.doublelogic.spg.common.RegExDefaults;
 
 public class SimplePasswordGeneratorActivity extends Activity {
 
-	private static final int REQUEST_RESULT_PASSWORDS = 1;
+	private ImageButton buttonPasswords;
+	private ImageButton buttonSaves;
+	private ImageButton buttonSettings;
 
-	private PasswordSettings passSettings;
-
-	private EditText editTextLength;
-	private EditText editTextQuantity;
-	private EditText editTextRegEx;
-
-	private CheckBox checkBoxLetters;
-	private CheckBox checkBoxNumbers;
-	private CheckBox checkBoxSpecialChar;
+	private Fragment passwordGeneratorFragment;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		passwordGeneratorFragment = new PasswordGeneratorFragment();
+		
+		buttonPasswords = (ImageButton) findViewById(R.id.buttonPassword);
+		buttonPasswords.setSelected(true);
+		buttonPasswords.setOnClickListener(listener);
 
-		loadUIReferences();
+		buttonSaves = (ImageButton) findViewById(R.id.buttonSaves);
+		buttonSaves.setSelected(false);
+		buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_find_holo_dark_dark));
+		buttonSaves.setOnClickListener(listener);
+		
+		buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
+		buttonSettings.setSelected(false);
+		buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings_dark));
+		buttonSettings.setOnClickListener(listener);
 
-		passSettings = new PasswordSettings();
-
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		showFragment(passwordGeneratorFragment);
 	}
 
-	private void loadUIReferences() {
-		editTextLength = (EditText) findViewById(R.id.editTextLength);
-		editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
-		editTextRegEx = (EditText) findViewById(R.id.editTextRegEx);
+	private final OnClickListener listener = new OnClickListener() {
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.buttonPassword:
+				showFragment(passwordGeneratorFragment);
+				buttonPasswords.setSelected(true);
+				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_login));
+				buttonSaves.setSelected(false);
+				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_find_holo_dark_dark));
+				buttonSettings.setSelected(false);
+				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings_dark));
+				break;
 
-		checkBoxLetters = (CheckBox) findViewById(R.id.checkBoxLetters);
-		checkBoxNumbers = (CheckBox) findViewById(R.id.checkBoxNumbers);
-		checkBoxSpecialChar = (CheckBox) findViewById(R.id.checkBoxSpecialChar);
-	}
-
-	public void checkBoxClickHandler(View view) {
-		if (checkBoxLetters.isChecked()) {
-			if (checkBoxNumbers.isChecked() && checkBoxSpecialChar.isChecked()) {
-				editTextRegEx.setText(String.valueOf(RegExDefaults.DEFAULT_REG_EX));
-			} else if (checkBoxNumbers.isChecked()) {
-				editTextRegEx.setText(String.valueOf(RegExDefaults.LETTERS_NUMBERS_REG_EX));
-			} else if (checkBoxSpecialChar.isChecked()) {
-				editTextRegEx.setText(String.valueOf(RegExDefaults.LETTERS_SPECIAL_CHAR_REG_EX));
-			} else {
-				editTextRegEx.setText(String.valueOf(RegExDefaults.LETTERS_REG_EX));
-			}
-		} else {
-			if (checkBoxNumbers.isChecked() && checkBoxSpecialChar.isChecked()) {
-				editTextRegEx.setText(String.valueOf(RegExDefaults.NUMBERS_SPECIAL_CHAR_REG_EX));
-			} else if (checkBoxNumbers.isChecked()) {
-				editTextRegEx.setText(String.valueOf(RegExDefaults.NUMBERS_REG_EX));
-			} else if (checkBoxSpecialChar.isChecked()) {
-				editTextRegEx.setText(String.valueOf(RegExDefaults.SPECIAL_CHAR_REG_EX));
+			case R.id.buttonSaves:
+				showFragment(passwordGeneratorFragment);
+				buttonPasswords.setSelected(false);
+				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_login_dark));
+				buttonSaves.setSelected(true);
+				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_find_holo_dark));
+				buttonSettings.setSelected(false);
+				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings_dark));
+				break;
+			case R.id.buttonSettings:
+				showFragment(passwordGeneratorFragment);
+				buttonPasswords.setSelected(false);
+				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_login_dark));
+				buttonSaves.setSelected(false);
+				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_find_holo_dark_dark));
+				buttonSettings.setSelected(true);
+				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings));
+				break;	
+				
 			}
 		}
-	}
+	};
 
-	public void generateClickHandler(View view) {
-		switch (view.getId()) {
-		case R.id.buttonGenerate:
-
-			String length = editTextLength.getText().toString();
-			if ((length != null) && (length.trim().length() > 0)) {
-				passSettings.setLength(Integer.parseInt(length));
-			}
-
-			String quantity = editTextQuantity.getText().toString();
-			if ((quantity != null) && (quantity.trim().length() > 0)) {
-				passSettings.setQuantity(Integer.parseInt(quantity));
-			}
-
-			String regEx = editTextRegEx.getText().toString();
-			if ((regEx != null) && (regEx.trim().length() > 0)) {
-				passSettings.setRegEx(regEx);
-			}
-
-			Intent requestResult = new Intent(this, ResultPasswordsActivity.class);
-			requestResult.putExtra(PasswordSettings.KEY, passSettings);
-			startActivityForResult(requestResult, REQUEST_RESULT_PASSWORDS);
-
-			break;
-		}
+	private void showFragment(Fragment f) {
+		FragmentManager fm = getFragmentManager();
+		FragmentTransaction fragmentTransaction = fm.beginTransaction();
+		fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.replace(R.id.fragmentContent, f);
+		fragmentTransaction.commit();
 	}
 
 }

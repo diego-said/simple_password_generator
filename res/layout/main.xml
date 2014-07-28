@@ -1,133 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
     android:orientation="vertical" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tab_background"
+        android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="top"
-            android:orientation="vertical" >
+        <ImageButton
+            android:id="@+id/buttonPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector"
+            android:gravity="center"
+            android:src="@drawable/ic_menu_login" />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="10dp"
-                android:orientation="vertical" >
-            </LinearLayout>
+        <FrameLayout
+            android:id="@+id/view_space"
+            android:layout_width="1dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:background="@color/tab_line" />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="145dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/length"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <EditText
-                    android:id="@+id/editTextLength"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number" android:maxLength="3" android:text="12">
+        <ImageButton
+            android:id="@+id/buttonSaves"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector"
+            android:gravity="center"
+            android:src="@drawable/ic_menu_find_holo_dark_dark" />
 
-                    <requestFocus />
-                </EditText>
+        <FrameLayout
+            android:id="@+id/view_space2"
+            android:layout_width="1dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:background="@color/tab_line" />
 
-            </LinearLayout>
+        <ImageButton
+            android:id="@+id/buttonSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/tab_selector"
+            android:gravity="center"
+            android:src="@drawable/ic_action_settings_dark" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="10dp"
-                android:orientation="vertical" >
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="145dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/quantity"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <EditText
-                    android:id="@+id/editTextQuantity"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number" android:maxLength="3" android:text="5"/>
+    <ImageView
+        android:id="@+id/tabGradient"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/tab_gradient" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="10dp"
-                android:orientation="vertical" >
-            </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/checkBoxLetters"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/letters" android:checked="true" android:onClick="checkBoxClickHandler"/>
-
-            <CheckBox
-                android:id="@+id/checkBoxNumbers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/numbers" android:checked="true" android:onClick="checkBoxClickHandler"/>
-
-            <CheckBox
-                android:id="@+id/checkBoxSpecialChar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/special_chars" android:onClick="checkBoxClickHandler"/>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="10dp"
-                android:orientation="vertical" >
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/editTextRegEx"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:ems="10" android:text="[a-zA-Z0-9]"/>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="20dp"
-                android:orientation="vertical" >
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/buttonGenerate"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/generate" android:onClick="generateClickHandler"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+    <FrameLayout
+        android:id="@+id/fragmentContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/transparent"
+        android:dividerHeight="10dp"
+        android:listSelector="@color/transparent" >
+    </FrameLayout>
 
 </LinearLayout>
