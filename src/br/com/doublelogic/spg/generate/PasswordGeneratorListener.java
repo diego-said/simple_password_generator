@@ -4,6 +4,7 @@ import br.com.doublelogic.spg.bean.PasswordSettings;
 
 public interface PasswordGeneratorListener {
 
-	void onComplete(PasswordSettings p);
+	void onPreExecute();
+	void onPostExecute(PasswordSettings p);
 
 }
