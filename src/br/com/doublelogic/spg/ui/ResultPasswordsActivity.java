@@ -1,17 +1,15 @@
 package br.com.doublelogic.spg.ui;
 
-import java.util.Random;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 import br.com.doublelogic.spg.R;
 import br.com.doublelogic.spg.bean.PasswordSettings;
@@ -20,11 +18,17 @@ public class ResultPasswordsActivity extends Activity {
 
 	private PasswordSettings passSettings;
 
-	private TreeMap<Long, CheckBox> checkBoxMap;
+	private ListView listViewPasswords;
 
-	private LinearLayout linearLayoutMain;
+	private ImageView buttonRefresh;
+	private ImageView buttonSelectAll;
+	private ImageView buttonCopy;
+	private ImageView buttonMail;
+	private ImageView buttonSave;
 
-	private float scale;
+	private View loadingBar;
+	private View loadingText;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,50 +50,18 @@ public class ResultPasswordsActivity extends Activity {
 	}
 
 	private void loadUIReferences() {
+
+		listViewPasswords = (ListView) findViewById(R.id.listViewPasswords);
+
+		buttonRefresh = (ImageView) findViewById(R.id.buttonRefresh);
+		buttonSelectAll = (ImageView) findViewById(R.id.buttonSelectAll);
+		buttonCopy = (ImageView) findViewById(R.id.buttonCopy);
+		buttonMail = (ImageView) findViewById(R.id.buttonMail);
+		buttonSave = (ImageView) findViewById(R.id.buttonSave);
+
+		loadingBar;
+		loadingText;
 		linearLayoutMain = (LinearLayout) findViewById(R.id.linearLayoutMain);
-	}
-
-	private void generatePasswords() {
-		int layoutIndex = 0;
-		for (int i = 0; i < passSettings.getQuantity(); i++) {
-			String password = generatePassword(passSettings.getRegEx(), passSettings.getLength());
-
-			LinearLayout layout = new LinearLayout(this);
-			layout.setOrientation(LinearLayout.HORIZONTAL);
-			layout.setId(++layoutIndex);
-			layout.setVisibility(LinearLayout.VISIBLE);
-
-			addCheckBox(layout, password);
-
-			linearLayoutMain.addView(layout, new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-		}
-	}
-
-	private String generatePassword(String regex, int length) {
-		StringBuilder password = new StringBuilder();
-		Random rand = new Random(System.currentTimeMillis());
-
-		Pattern er = Pattern.compile(regex);
-		Matcher result = null;
-
-		while (password.length() != length) {
-			char[] c = { (char) (32 + rand.nextInt(255)) };
-			result = er.matcher(new String(c));
-			if (result.matches()) {
-				password.append(c);
-			}
-		}
-
-		return password.toString();
-	}
-
-	private void addCheckBox(LinearLayout layout, String password) {
-		CheckBox checkBox = new CheckBox(this);
-		checkBox.setHeight((int) ((25 * scale) + 0.5f));
-		checkBox.setText(password);
-		layout.addView(checkBox);
-
-		checkBoxMap.put(System.currentTimeMillis(), checkBox);
 	}
 
 	public void copyClickHandler(View view) {

@@ -33,6 +33,7 @@ public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Bool
 		}
 
 		passwordSettings = params[0];
+		passwordSettings.clearPasswords();
 
 		for (int i = 0; i < passwordSettings.getQuantity(); i++) {
 			String password = generatePassword(passwordSettings.getRegEx(), passwordSettings.getLength());
