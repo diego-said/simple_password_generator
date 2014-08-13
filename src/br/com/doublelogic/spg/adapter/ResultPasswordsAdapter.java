@@ -3,7 +3,9 @@ package br.com.doublelogic.spg.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,16 +24,18 @@ public class ResultPasswordsAdapter extends BaseAdapter {
 	private PasswordSettings passwordSettings;
 
 	private final SparseBooleanArray passwords;
+	private final SparseArray<CheckBox> checkboxPasswords;
 
-	private ResultPasswordsAdapter(Context context) {
+	public ResultPasswordsAdapter(Context context) {
 		this.context = context;
 
 		passwords = new SparseBooleanArray();
+		checkboxPasswords = new SparseArray<CheckBox>();
 	}
 
 	public int getCount() {
 		if(passwordSettings != null) {
-			return passwordSettings.getLength();
+			return passwordSettings.getPasswords().size();
 		}
 		return 0;
 	}
@@ -47,22 +51,32 @@ public class ResultPasswordsAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressLint("InflateParams")
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.list_item_password, parent);
+			final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.list_item_password, null);
 
-			CheckBox checkboxPassword = (CheckBox) convertView.findViewById(R.id.checkBoxPassword);
+			final CheckBox checkboxPassword = (CheckBox) convertView.findViewById(R.id.checkBoxPassword);
+			checkboxPassword.setText(passwordSettings.getPasswords().get(position));
 			checkboxPassword.setTag(position);
 			checkboxPassword.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					Integer position = (Integer) buttonView.getTag();
+					final Integer position = (Integer) buttonView.getTag();
 					passwords.put(position, isChecked);
 				}
 			});
+			checkboxPasswords.put(position, checkboxPassword);
 		}
 
 		return convertView;
+	}
+
+	@Override
+	public void notifyDataSetChanged() {
+		super.notifyDataSetChanged();
+		passwords.clear();
+		checkboxPasswords.clear();
 	}
 
 	public PasswordSettings getPasswordSettings() {
@@ -74,14 +88,22 @@ public class ResultPasswordsAdapter extends BaseAdapter {
 	}
 
 	public List<String> getSelectedPasswords() {
-		List<String> selectedPasswords = new ArrayList<String>(passwords.size());
+		final List<String> selectedPasswords = new ArrayList<String>(passwords.size());
 		for (int i = 0; i < passwords.size(); i++) {
-			int pos = passwords.keyAt(i);
+			final int pos = passwords.keyAt(i);
 			if(passwords.get(pos)) {
 				selectedPasswords.add(passwordSettings.getPasswords().get(pos));
 			}
-	    }
+		}
 		return selectedPasswords;
+	}
+
+	public void checkedAll(boolean check) {
+		for (int i = 0; i < checkboxPasswords.size(); i++) {
+			final int pos = checkboxPasswords.keyAt(i);
+			final CheckBox checkBox = checkboxPasswords.get(pos);
+			checkBox.setChecked(check);
+		}
 	}
 
 }
