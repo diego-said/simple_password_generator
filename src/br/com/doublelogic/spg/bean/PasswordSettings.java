@@ -12,6 +12,9 @@ public class PasswordSettings implements Serializable {
 
 	public static final String KEY = "passwordSettings";
 
+	private long id;
+
+	private String name;
 	private String regEx;
 
 	private int length;
@@ -20,8 +23,9 @@ public class PasswordSettings implements Serializable {
 	private final List<String> passwords;
 
 	public PasswordSettings() {
+		id = -1;
+		name = "";
 		regEx = String.valueOf(RegExDefaults.LETTERS_NUMBERS_REG_EX);
-
 		length = 12;
 		quantity = 5;
 
@@ -62,6 +66,22 @@ public class PasswordSettings implements Serializable {
 
 	public void clearPasswords() {
 		passwords.clear();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }
