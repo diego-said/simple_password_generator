@@ -19,26 +19,58 @@ public class PasswordsDbHelper extends DatabseHelper {
 	public PasswordsDbHelper(Context context) {
 		super(context);
 	}
+	
+	public List<PasswordSettings> getListPasswordSettings() {
+		final List<PasswordSettings> listPasswordSettings = new ArrayList<PasswordSettings>();
 
-	public Map<String, List<Long>> getIgnoredNumbers() {
-		final Map<String, List<Long>> numbers = new HashMap<String, List<Long>>();
 		SQLiteDatabase db = null;
 		Cursor cursor = null;
 		try {
 			db = getReadableDatabase();
-			cursor = db.query(TABLE_IGNORED_NUMBERS.TABLE_NAME, new String[] {
-					TABLE_IGNORED_NUMBERS.COLUMN_NUMBER,
-					TABLE_IGNORED_NUMBERS.COLUMN_IGNORE_DATE }, null, null,
-					null, null, null);
+
+			cursor = db.rawQuery("select * from " + TABLE_PASSWORD_SETTINGS.TABLE_NAME
+					+ "a left join " + TABLE_PASSWORDS.TABLE_NAME + "b on a."
+					+ TABLE_PASSWORD_SETTINGS.COLUMN_ID + " = b."
+					+ TABLE_PASSWORDS.COLUMN_PASSWORD_SETTINGS_ID + " order by a."
+					+ TABLE_PASSWORD_SETTINGS.COLUMN_ID,
+					null);
+
+			int idIndex = -1;
+			int nameIndex = -1;
+			int regexIndex = -1;
+			int lengthIndex = -1;
+			int quantityIndex = -1;
+			int passwordIndex = -1;
+			
+			PasswordSettings settings = null;
 			while (cursor != null && cursor.moveToNext()) {
-				final String number = cursor.getString(0);
-				final long date = cursor.getLong(1);
-				List<Long> dates = numbers.get(number);
-				if (dates == null) {
-					dates = new ArrayList<Long>();
-					numbers.put(number, dates);
+				if(settings == null) {
+					idIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_ID);
+					nameIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_NAME);
+					regexIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_REGEX);
+					lengthIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_LENGTH);
+					quantityIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_QUANTITY);
+					
+					passwordIndex = cursor.getColumnIndex(TABLE_PASSWORDS.COLUMN_PASSWORD);
 				}
-				dates.add(date);
+				
+				PasswordSettings actualSettings = new PasswordSettings();
+				actualSettings.setId(cursor.getInt(idIndex));
+				
+				if(settings != null && settings.getId() == actualSettings.getId()) {
+					settings.getPasswords().add(cursor.getString(passwordIndex));
+				} else {
+					actualSettings.setName(cursor.getString(nameIndex));
+					actualSettings.setRegEx(cursor.getString(regexIndex));
+					actualSettings.setLength(cursor.getInt(lengthIndex));
+					actualSettings.setQuantity(cursor.getInt(quantityIndex));
+	
+					actualSettings.getPasswords().add(cursor.getString(passwordIndex));
+					
+					settings = actualSettings;
+					
+					listPasswordSettings.add(actualSettings);
+				}
 			}
 		} catch (final Exception e) {
 			Log.w(TAG, e.getMessage(), e);
@@ -51,7 +83,7 @@ public class PasswordsDbHelper extends DatabseHelper {
 			}
 			close();
 		}
-		return numbers;
+		return listPasswordSettings;
 	}
 
 	public PasswordSettings getPasswordSettings(long id) {
@@ -70,15 +102,30 @@ public class PasswordsDbHelper extends DatabseHelper {
 					+ TABLE_PASSWORD_SETTINGS.COLUMN_NAME,
 					new String[] { String.valueOf(id) });
 
+			int idIndex = -1;
+			int nameIndex = -1;
+			int regexIndex = -1;
+			int lengthIndex = -1;
+			int quantityIndex = -1;
+			int passwordIndex = -1;
 			while (cursor != null && cursor.moveToNext()) {
-				final String number = cursor.getString(0);
-				final long date = cursor.getLong(1);
-				List<Long> dates = numbers.get(number);
-				if (dates == null) {
-					dates = new ArrayList<Long>();
-					numbers.put(number, dates);
+				if(settings.getId() == -1) {
+					idIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_ID);
+					nameIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_NAME);
+					regexIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_REGEX);
+					lengthIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_LENGTH);
+					quantityIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_QUANTITY);
+					
+					passwordIndex = cursor.getColumnIndex(TABLE_PASSWORDS.COLUMN_PASSWORD);
+					
+					settings.setId(cursor.getInt(idIndex));
+					settings.setName(cursor.getString(nameIndex));
+					settings.setRegEx(cursor.getString(regexIndex));
+					settings.setLength(cursor.getInt(lengthIndex));
+					settings.setQuantity(cursor.getInt(quantityIndex));
 				}
-				dates.add(date);
+				
+				settings.getPasswords().add(cursor.getString(passwordIndex));
 			}
 		} catch (final Exception e) {
 			Log.w(TAG, e.getMessage(), e);
