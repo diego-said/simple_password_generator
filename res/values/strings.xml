@@ -12,4 +12,6 @@
     <string name="copy_message">Passwords copied</string>
 	<string name="loading_message">Please wait&#8230;</string>
 	<string name="no_password">Please, select at least one password</string>
+	<string name="save_message">Save passwords</string>
+	<string name="save_description">Enter an identification</string>
 </resources>

@@ -1,9 +1,7 @@
 package br.com.doublelogic.spg.db;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,7 +17,7 @@ public class PasswordsDbHelper extends DatabseHelper {
 	public PasswordsDbHelper(Context context) {
 		super(context);
 	}
-	
+
 	public List<PasswordSettings> getListPasswordSettings() {
 		final List<PasswordSettings> listPasswordSettings = new ArrayList<PasswordSettings>();
 
@@ -41,7 +39,7 @@ public class PasswordsDbHelper extends DatabseHelper {
 			int lengthIndex = -1;
 			int quantityIndex = -1;
 			int passwordIndex = -1;
-			
+
 			PasswordSettings settings = null;
 			while (cursor != null && cursor.moveToNext()) {
 				if(settings == null) {
@@ -50,13 +48,13 @@ public class PasswordsDbHelper extends DatabseHelper {
 					regexIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_REGEX);
 					lengthIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_LENGTH);
 					quantityIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_QUANTITY);
-					
+
 					passwordIndex = cursor.getColumnIndex(TABLE_PASSWORDS.COLUMN_PASSWORD);
 				}
-				
-				PasswordSettings actualSettings = new PasswordSettings();
+
+				final PasswordSettings actualSettings = new PasswordSettings();
 				actualSettings.setId(cursor.getInt(idIndex));
-				
+
 				if(settings != null && settings.getId() == actualSettings.getId()) {
 					settings.getPasswords().add(cursor.getString(passwordIndex));
 				} else {
@@ -64,11 +62,11 @@ public class PasswordsDbHelper extends DatabseHelper {
 					actualSettings.setRegEx(cursor.getString(regexIndex));
 					actualSettings.setLength(cursor.getInt(lengthIndex));
 					actualSettings.setQuantity(cursor.getInt(quantityIndex));
-	
+
 					actualSettings.getPasswords().add(cursor.getString(passwordIndex));
-					
+
 					settings = actualSettings;
-					
+
 					listPasswordSettings.add(actualSettings);
 				}
 			}
@@ -115,16 +113,16 @@ public class PasswordsDbHelper extends DatabseHelper {
 					regexIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_REGEX);
 					lengthIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_LENGTH);
 					quantityIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_QUANTITY);
-					
+
 					passwordIndex = cursor.getColumnIndex(TABLE_PASSWORDS.COLUMN_PASSWORD);
-					
+
 					settings.setId(cursor.getInt(idIndex));
 					settings.setName(cursor.getString(nameIndex));
 					settings.setRegEx(cursor.getString(regexIndex));
 					settings.setLength(cursor.getInt(lengthIndex));
 					settings.setQuantity(cursor.getInt(quantityIndex));
 				}
-				
+
 				settings.getPasswords().add(cursor.getString(passwordIndex));
 			}
 		} catch (final Exception e) {
@@ -141,8 +139,22 @@ public class PasswordsDbHelper extends DatabseHelper {
 		return settings;
 	}
 
-	public void savePasswords(String name, PasswordSettings settings,
-			List<String> passwords) {
+	public void removePasswords(long id) {
+		SQLiteDatabase db = null;
+		try {
+			db = getWritableDatabase();
+			db.delete(TABLE_PASSWORD_SETTINGS.TABLE_NAME, TABLE_PASSWORD_SETTINGS.COLUMN_ID + "=?", new String[] { String.valueOf(id) } );
+		} catch (final Exception e) {
+			Log.w(TAG, e.getMessage(), e);
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			close();
+		}
+	}
+
+	public void savePasswords(String name, PasswordSettings settings, List<String> passwords) {
 		SQLiteDatabase db = null;
 		try {
 			db = getWritableDatabase();
@@ -157,6 +169,7 @@ public class PasswordsDbHelper extends DatabseHelper {
 			final long id = db.insertOrThrow(
 					TABLE_PASSWORD_SETTINGS.TABLE_NAME, null, values);
 			if (id != -1) {
+				settings.setId(id);
 				for (final String p : passwords) {
 					values.clear();
 					values.put(TABLE_PASSWORDS.COLUMN_PASSWORD, p);
@@ -164,7 +177,6 @@ public class PasswordsDbHelper extends DatabseHelper {
 					db.insertOrThrow(TABLE_PASSWORDS.TABLE_NAME, null, values);
 				}
 			}
-
 		} catch (final Exception e) {
 			Log.w(TAG, e.getMessage(), e);
 		} finally {
