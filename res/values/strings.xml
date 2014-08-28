@@ -10,6 +10,7 @@
     <string name="copy">Copy</string>
     <string name="copy_all">Copy All</string>
     <string name="copy_message">Passwords copied</string>
+    <string name="save_passwords_message">Passwords have been saved</string>
 	<string name="loading_message">Please wait&#8230;</string>
 	<string name="no_password">Please, select at least one password</string>
 	<string name="save_message">Save passwords</string>

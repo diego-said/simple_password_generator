@@ -167,13 +167,17 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 			alert.setPositiveButton("Ok",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
-							final PasswordSettings saveSettings = new PasswordSettings();
 							String name = input.getText().toString();
 							if(name == null || name.trim().length() == 0) {
 								name = "Passwords: " + adapter.getSelectedPasswords().size();
 							}
 
+							if(passSettings.getId() != -1) {
+								dbHelper.removePasswords(passSettings.getId());
+							}
+
 							dbHelper.savePasswords(name, passSettings, adapter.getSelectedPasswords());
+							Toast.makeText(ResultPasswordsActivity.this, getString(R.string.save_passwords_message), Toast.LENGTH_SHORT).show();
 						}
 					});
 
