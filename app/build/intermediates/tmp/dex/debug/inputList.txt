@@ -1,2 +1,0 @@
-/Users/diego/Desenv/Android/git/simple_password_generator/app/build/intermediates/classes/debug
-/Users/diego/Desenv/Android/git/simple_password_generator/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-b41a82a23f5a67dd169daf08229fff543221e491.jar
