@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple Password Generator</string>
+    <string name="letters">письмена</string>
+    <string name="numbers">Номера</string>
+    <string name="special_chars">Специальные символы</string>
+    <string name="length">Длина</string>
+    <string name="quantity">количество</string>
+    <string name="generate">Порождать</string>
+    <string name="copy">копировать</string>
+    <string name="copy_all">Копировать все</string>
+    <string name="copy_message">Пароли скопировать</string>
+
+</resources>

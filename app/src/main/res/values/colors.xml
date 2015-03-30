@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_color">#2E3233</color>
+    <color name="tab_background">#515B5E</color>
+    <color name="tab_line">#E2E3DF</color>
+    <color name="tab_font_active">#E2E3DF</color>
+    <color name="tab_font_idle">#2E3233</color>
+    <color name="transparent">#000000</color>
+    <color name="list_divider">#2E3233</color>
+</resources>
