@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/diegoalvessaidsimao/Desenv/Android/git/simple_password_generator/app/src/main/res/values-pt/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">Simple Password Generator</string>
+    <string name="copy">Copiar</string>
+    <string name="copy_all">Copiar tudo</string>
+    <string name="copy_message">Senhas copiadas</string>
+    <string name="generate">Gerar</string>
+    <string name="length">Comprimento</string>
+    <string name="letters">Letras</string>
+    <string name="numbers">Números</string>
+    <string name="quantity">Quantidade</string>
+    <string name="special_chars">Caracteres especiais</string>
+</resources>

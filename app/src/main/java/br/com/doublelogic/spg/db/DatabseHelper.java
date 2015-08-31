@@ -26,7 +26,7 @@ public class DatabseHelper extends SQLiteOpenHelper {
 		public static final String COLUMN_LENGTH = "length";
 		public static final String COLUMN_QUANTITY = "quantity";
 
-		public static final String CREATE_TABLE = "create table " + TABLE_NAME + " (" + COLUMN_ID + " integer primary key autoincrement, " +
+		public static final String CREATE_TABLE = "create table " + TABLE_NAME + " (" + COLUMN_ID + "integer primary key autoincrement, " +
 				COLUMN_NAME + " text not null,  " + COLUMN_REGEX + " text not null,  " + COLUMN_LENGTH +" integer not null," + COLUMN_QUANTITY +" integer not null);";
 		public static final String CREATE_INDEX = "create index "+INDEX_NAME+" on "+TABLE_NAME+" ("+COLUMN_NAME+")";
 	}
@@ -39,7 +39,7 @@ public class DatabseHelper extends SQLiteOpenHelper {
 		public static final String COLUMN_PASSWORD = "password";
 		public static final String COLUMN_PASSWORD_SETTINGS_ID = "password_settings_id";
 
-		public static final String CREATE_TABLE = "create table " + TABLE_NAME + " (" + COLUMN_ID + " integer primary key autoincrement, " +
+		public static final String CREATE_TABLE = "create table " + TABLE_NAME + " (" + COLUMN_ID + "integer primary key autoincrement, " +
 				COLUMN_PASSWORD + " text not null,  " + COLUMN_PASSWORD_SETTINGS_ID +" integer not null," +
 				"foreign key(" + COLUMN_PASSWORD_SETTINGS_ID + ") references " + TABLE_PASSWORD_SETTINGS.TABLE_NAME + "(" + TABLE_PASSWORD_SETTINGS.COLUMN_ID + ") on delete cascade);";
 		public static final String CREATE_INDEX = "create index "+INDEX_NAME+" on "+TABLE_NAME+" ("+COLUMN_PASSWORD+")";

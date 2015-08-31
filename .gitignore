@@ -21,3 +21,8 @@ app/src/main/res/values/com_crashlytics_export_strings.xml
 .idea/vcs.xml
 .idea/copyright/profiles_settings.xml
 .idea/scopes/scope_settings.xml
+bin/AndroidManifest.xml
+bin/jarlist.cache
+.gradle/*
+.idea/*
+app/build

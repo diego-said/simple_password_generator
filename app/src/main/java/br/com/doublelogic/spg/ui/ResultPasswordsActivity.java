@@ -1,21 +1,17 @@
 package br.com.doublelogic.spg.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ClipboardManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import br.com.doublelogic.spg.R;
 import br.com.doublelogic.spg.adapter.ResultPasswordsAdapter;
 import br.com.doublelogic.spg.bean.PasswordSettings;
-import br.com.doublelogic.spg.db.PasswordsDbHelper;
 import br.com.doublelogic.spg.generate.PasswordGenerator;
 import br.com.doublelogic.spg.generate.PasswordGeneratorListener;
 
@@ -37,8 +33,6 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 	private ResultPasswordsAdapter adapter;
 	private PasswordGenerator passwordGenerator;
 
-	private PasswordsDbHelper dbHelper;
-
 	private boolean checkAll = false;
 
 	@Override
@@ -47,9 +41,6 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 		setContentView(R.layout.result_passwords);
 
 		adapter = new ResultPasswordsAdapter(this);
-
-		dbHelper = new PasswordsDbHelper(this);
-		dbHelper.getDatabaseName();
 
 		loadUIReferences();
 
@@ -95,11 +86,6 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 		});
 
 		buttonSave = (ImageView) findViewById(R.id.buttonSave);
-		buttonSave.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				saveClickHandler(v);
-			}
-		});
 
 		loadingBar = findViewById(R.id.loadingBar);
 		loadingText = findViewById(R.id.loadingText);
@@ -149,46 +135,6 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 			} catch (final android.content.ActivityNotFoundException ex) {
 				Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
 			}
-		} else {
-			Toast.makeText(this, getString(R.string.no_password), Toast.LENGTH_SHORT).show();
-		}
-	}
-
-	private void saveClickHandler(View v) {
-		if(adapter.getSelectedPasswords().size() > 0) {
-			final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-			alert.setTitle(R.string.save_message);
-			alert.setMessage(R.string.save_description);
-
-			final EditText input = new EditText(this);
-			alert.setView(input);
-
-			alert.setPositiveButton("Ok",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int whichButton) {
-							String name = input.getText().toString();
-							if(name == null || name.trim().length() == 0) {
-								name = "Passwords: " + adapter.getSelectedPasswords().size();
-							}
-
-							if(passSettings.getId() != -1) {
-								dbHelper.removePasswords(passSettings.getId());
-							}
-
-							dbHelper.savePasswords(name, passSettings, adapter.getSelectedPasswords());
-							Toast.makeText(ResultPasswordsActivity.this, getString(R.string.save_passwords_message), Toast.LENGTH_SHORT).show();
-						}
-					});
-
-			alert.setNegativeButton("Cancel",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int whichButton) {
-							// Canceled.
-						}
-					});
-
-			alert.show();
 		} else {
 			Toast.makeText(this, getString(R.string.no_password), Toast.LENGTH_SHORT).show();
 		}

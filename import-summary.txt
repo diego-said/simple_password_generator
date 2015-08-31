@@ -45,7 +45,6 @@ so manually move them:
 * app/src/main/java/br/com/doublelogic/spg/ui/
 * app/src/main/java/br/com/doublelogic/spg/ui/PasswordGeneratorFragment.java
 * app/src/main/java/br/com/doublelogic/spg/ui/ResultPasswordsActivity.java
-* app/src/main/java/br/com/doublelogic/spg/ui/SavePasswordFragment.java
 * app/src/main/java/br/com/doublelogic/spg/ui/SimplePasswordGeneratorActivity.java
 * app/src/main/res/
 * app/src/main/res/drawable-hdpi/
@@ -412,10 +411,8 @@ so manually move them:
 * app/src/main/res/layout/
 * app/src/main/res/layout/generate_passwords.xml
 * app/src/main/res/layout/list_item_password.xml
-* app/src/main/res/layout/list_item_save_password.xml
 * app/src/main/res/layout/main.xml
 * app/src/main/res/layout/result_passwords.xml
-* app/src/main/res/layout/save_passwords.xml
 * app/src/main/res/values-da/
 * app/src/main/res/values-da/strings.xml
 * app/src/main/res/values-de/
@@ -478,6 +475,7 @@ Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
 * AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* assets/ => app/src/main/assets/
 * res/ => app/src/main/res/
 * src/ => app/src/main/java/
 
