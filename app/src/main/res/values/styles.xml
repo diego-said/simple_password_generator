@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Black.NoTitleBar">
+    <style name="AppTheme2" parent="android:Theme.Black.NoTitleBar">
         <item name="android:windowNoTitle">true</item>
     </style>
 
