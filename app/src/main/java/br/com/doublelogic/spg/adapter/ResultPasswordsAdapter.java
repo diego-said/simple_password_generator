@@ -56,18 +56,18 @@ public class ResultPasswordsAdapter extends BaseAdapter {
 		if (convertView == null) {
 			final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.list_item_password, null);
-
-			final CheckBox checkboxPassword = (CheckBox) convertView.findViewById(R.id.checkBoxPassword);
-			checkboxPassword.setText(passwordSettings.getPasswords().get(position));
-			checkboxPassword.setTag(position);
-			checkboxPassword.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					final Integer position = (Integer) buttonView.getTag();
-					passwords.put(position, isChecked);
-				}
-			});
-			checkboxPasswords.put(position, checkboxPassword);
 		}
+		final CheckBox checkboxPassword = (CheckBox) convertView.findViewById(R.id.checkBoxPassword);
+		checkboxPassword.setText(passwordSettings.getPasswords().get(position));
+		checkboxPassword.setTag(position);
+		checkboxPassword.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                final Integer position = (Integer) buttonView.getTag();
+                passwords.put(position, isChecked);
+            }
+        });
+		checkboxPassword.setChecked(passwords.get(position));
+		checkboxPasswords.put(position, checkboxPassword);
 
 		return convertView;
 	}
@@ -99,11 +99,14 @@ public class ResultPasswordsAdapter extends BaseAdapter {
 	}
 
 	public void checkedAll(boolean check) {
-		for (int i = 0; i < checkboxPasswords.size(); i++) {
-			final int pos = checkboxPasswords.keyAt(i);
-			final CheckBox checkBox = checkboxPasswords.get(pos);
-			checkBox.setChecked(check);
-		}
+        for(int i = 0; i < passwordSettings.getPasswords().size(); i++) {
+            passwords.put(i, check);
+            if(i < checkboxPasswords.size()) {
+                final int pos = checkboxPasswords.keyAt(i);
+                final CheckBox checkBox = checkboxPasswords.get(pos);
+                checkBox.setChecked(check);
+            }
+        }
 	}
 
 }

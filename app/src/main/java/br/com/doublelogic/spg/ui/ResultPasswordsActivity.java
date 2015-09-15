@@ -102,7 +102,7 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 	}
 
 	private void selectAllClickHandler(View v) {
-		adapter.checkedAll(checkAll= !checkAll);
+		adapter.checkedAll(checkAll = !checkAll);
 	}
 
 	private void copyClickHandler(View view) {
