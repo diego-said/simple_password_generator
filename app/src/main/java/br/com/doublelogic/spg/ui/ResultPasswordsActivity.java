@@ -9,9 +9,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.List;
+
 import br.com.doublelogic.spg.R;
 import br.com.doublelogic.spg.adapter.ResultPasswordsAdapter;
 import br.com.doublelogic.spg.bean.PasswordSettings;
+import br.com.doublelogic.spg.db.PasswordsDbHelper;
 import br.com.doublelogic.spg.generate.PasswordGenerator;
 import br.com.doublelogic.spg.generate.PasswordGeneratorListener;
 
@@ -32,6 +36,7 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 
 	private ResultPasswordsAdapter adapter;
 	private PasswordGenerator passwordGenerator;
+    private PasswordsDbHelper dbHelper;
 
 	private boolean checkAll = false;
 
@@ -41,6 +46,8 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 		setContentView(R.layout.result_passwords);
 
 		adapter = new ResultPasswordsAdapter(this);
+        dbHelper = new PasswordsDbHelper(this);
+		dbHelper.getWritableDatabase();
 
 		loadUIReferences();
 
@@ -80,12 +87,17 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 
 		buttonMail = (ImageView) findViewById(R.id.buttonMail);
 		buttonMail.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				mailClickHandler(v);
-			}
-		});
+            public void onClick(View v) {
+                mailClickHandler(v);
+            }
+        });
 
 		buttonSave = (ImageView) findViewById(R.id.buttonSave);
+		buttonSave.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+                saveClickHandler(v);
+			}
+		});
 
 		loadingBar = findViewById(R.id.loadingBar);
 		loadingText = findViewById(R.id.loadingText);
@@ -139,6 +151,21 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 			Toast.makeText(this, getString(R.string.no_password), Toast.LENGTH_SHORT).show();
 		}
 	}
+
+	private void saveClickHandler(View v) {
+		final List<String> passwords = getPasswords();
+        if(passwords != null && passwords.size() > 0) {
+            //TODO fazer uma tela para solicitar o nome
+            passSettings.setName("Test");
+            dbHelper.savePasswords(passSettings, passwords);
+        }  else {
+            Toast.makeText(this, getString(R.string.no_password), Toast.LENGTH_SHORT).show();
+        }
+	}
+
+    private List<String> getPasswords() {
+        return adapter.getSelectedPasswords();
+    }
 
 	private void getPasswords(final StringBuilder memory) {
 		for (final String password : adapter.getSelectedPasswords()) {

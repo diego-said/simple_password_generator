@@ -1,15 +1,14 @@
 package br.com.doublelogic.spg.db;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.doublelogic.spg.bean.PasswordSettings;
 
 public class PasswordsDbHelper extends DatabseHelper {
@@ -30,9 +29,9 @@ public class PasswordsDbHelper extends DatabseHelper {
 
 			cursor = db.rawQuery("select * from " + TABLE_PASSWORD_SETTINGS.TABLE_NAME
 					+ "a left join " + TABLE_PASSWORDS.TABLE_NAME + "b on a."
-					+ TABLE_PASSWORD_SETTINGS.COLUMN_ID + " = b."
+					+ TABLE_PASSWORD_SETTINGS._ID + " = b."
 					+ TABLE_PASSWORDS.COLUMN_PASSWORD_SETTINGS_ID + " order by a."
-					+ TABLE_PASSWORD_SETTINGS.COLUMN_ID,
+					+ TABLE_PASSWORD_SETTINGS._ID,
 					null);
 
 			int idIndex = -1;
@@ -45,7 +44,7 @@ public class PasswordsDbHelper extends DatabseHelper {
 			PasswordSettings settings = null;
 			while (cursor != null && cursor.moveToNext()) {
 				if(settings == null) {
-					idIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_ID);
+					idIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS._ID);
 					nameIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_NAME);
 					regexIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_REGEX);
 					lengthIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_LENGTH);
@@ -96,9 +95,9 @@ public class PasswordsDbHelper extends DatabseHelper {
 
 			cursor = db.rawQuery("select * from " + TABLE_PASSWORD_SETTINGS.TABLE_NAME
 					+ "a left join " + TABLE_PASSWORDS.TABLE_NAME + "b on a."
-					+ TABLE_PASSWORD_SETTINGS.COLUMN_ID + " = b."
+					+ TABLE_PASSWORD_SETTINGS._ID + " = b."
 					+ TABLE_PASSWORDS.COLUMN_PASSWORD_SETTINGS_ID + " where a."
-					+ TABLE_PASSWORD_SETTINGS.COLUMN_ID + " = ? order by a."
+					+ TABLE_PASSWORD_SETTINGS._ID + " = ? order by a."
 					+ TABLE_PASSWORD_SETTINGS.COLUMN_NAME,
 					new String[] { String.valueOf(id) });
 
@@ -110,7 +109,7 @@ public class PasswordsDbHelper extends DatabseHelper {
 			int passwordIndex = -1;
 			while (cursor != null && cursor.moveToNext()) {
 				if(settings.getId() == -1) {
-					idIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_ID);
+					idIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS._ID);
 					nameIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_NAME);
 					regexIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_REGEX);
 					lengthIndex = cursor.getColumnIndex(TABLE_PASSWORD_SETTINGS.COLUMN_LENGTH);
@@ -141,19 +140,15 @@ public class PasswordsDbHelper extends DatabseHelper {
 		return settings;
 	}
 
-	public void savePasswords(String name, PasswordSettings settings,
-			List<String> passwords) {
+	public void savePasswords(PasswordSettings settings, List<String> passwords) {
 		SQLiteDatabase db = null;
 		try {
 			db = getWritableDatabase();
 			final ContentValues values = new ContentValues();
-			values.put(TABLE_PASSWORD_SETTINGS.COLUMN_NAME, name);
-			values.put(TABLE_PASSWORD_SETTINGS.COLUMN_REGEX,
-					settings.getRegEx());
-			values.put(TABLE_PASSWORD_SETTINGS.COLUMN_LENGTH,
-					settings.getLength());
-			values.put(TABLE_PASSWORD_SETTINGS.COLUMN_QUANTITY,
-					settings.getQuantity());
+			values.put(TABLE_PASSWORD_SETTINGS.COLUMN_NAME, settings.getName());
+			values.put(TABLE_PASSWORD_SETTINGS.COLUMN_REGEX, settings.getRegEx());
+			values.put(TABLE_PASSWORD_SETTINGS.COLUMN_LENGTH, settings.getLength());
+			values.put(TABLE_PASSWORD_SETTINGS.COLUMN_QUANTITY, settings.getQuantity());
 			final long id = db.insertOrThrow(
 					TABLE_PASSWORD_SETTINGS.TABLE_NAME, null, values);
 			if (id != -1) {
