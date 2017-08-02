@@ -30,7 +30,7 @@ public class ResultPasswordsAdapter extends BaseAdapter {
 		this.context = context;
 
 		passwords = new SparseBooleanArray();
-		checkboxPasswords = new SparseArray<CheckBox>();
+		checkboxPasswords = new SparseArray<>();
 	}
 
 	public int getCount() {

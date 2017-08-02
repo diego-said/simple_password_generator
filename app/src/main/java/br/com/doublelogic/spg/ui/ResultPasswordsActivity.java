@@ -156,7 +156,7 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 		final List<String> passwords = getPasswords();
         if(passwords != null && passwords.size() > 0) {
             //TODO fazer uma tela para solicitar o nome
-            passSettings.setName("Test");
+            passSettings.setName("Test" + System.currentTimeMillis());
             dbHelper.savePasswords(passSettings, passwords);
         }  else {
             Toast.makeText(this, getString(R.string.no_password), Toast.LENGTH_SHORT).show();
