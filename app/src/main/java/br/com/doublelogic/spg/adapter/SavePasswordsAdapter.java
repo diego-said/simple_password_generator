@@ -56,6 +56,13 @@ public class SavePasswordsAdapter extends BaseAdapter {
     }
 
     @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        passwords.clear();
+        checkboxPasswords.clear();
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

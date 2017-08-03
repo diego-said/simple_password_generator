@@ -32,6 +32,8 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
     private SavePasswordsAdapter adapter;
     private SavePasswordsLoader loader;
 
+    private boolean checkAll = false;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.save_passwords, container, false);
@@ -40,9 +42,7 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
 
 		loadUIReferences(view);
 
-        loader = new SavePasswordsLoader(getActivity());
-        loader.addListener(this);
-        loader.execute();
+        loadPasswords();
 
 		return view;
 	}
@@ -84,9 +84,11 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
 	}
 
     private void refreshClickHandler(View v) {
+        loadPasswords();
     }
 
     private void selectAllClickHandler(View v) {
+        adapter.checkedAll(checkAll = !checkAll);
     }
 
     private void editClickHandler(View v) {
@@ -114,5 +116,11 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
         if(adapter != null) {
             adapter.setSavePasswords(passwordsList);
         }
+    }
+
+    private void loadPasswords() {
+        loader = new SavePasswordsLoader(getActivity());
+        loader.addListener(this);
+        loader.execute();
     }
 }
