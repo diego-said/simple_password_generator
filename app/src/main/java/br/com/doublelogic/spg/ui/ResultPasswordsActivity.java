@@ -1,11 +1,15 @@
 package br.com.doublelogic.spg.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -155,9 +159,29 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 	private void saveClickHandler(View v) {
 		final List<String> passwords = getPasswords();
         if(passwords != null && passwords.size() > 0) {
-            //TODO fazer uma tela para solicitar o nome
-            passSettings.setName("Test" + System.currentTimeMillis());
-            dbHelper.savePasswords(passSettings, passwords);
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.save_passwords);
+
+			final EditText input = new EditText(this);
+			input.setInputType(InputType.TYPE_CLASS_TEXT);
+			builder.setView(input);
+
+			builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					passSettings.setName(input.getText().toString());
+					dbHelper.savePasswords(passSettings, passwords);
+					dialog.dismiss();
+				}
+			});
+			builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+
+			builder.show();
         }  else {
             Toast.makeText(this, getString(R.string.no_password), Toast.LENGTH_SHORT).show();
         }

@@ -85,7 +85,7 @@ public class SavePasswordsAdapter extends BaseAdapter {
         passwordIdent.setText(password.getName());
 
         final TextView passwordDesc = (TextView) convertView.findViewById(R.id.textViewPasswordDesc);
-        passwordDesc.setText(String.valueOf(password.getQuantity()));
+        passwordDesc.setText(String.valueOf(password.getPasswords().size()));
 
         final TextView passwordRegex = (TextView) convertView.findViewById(R.id.textViewPasswordRegex);
         passwordRegex.setText(password.getRegEx());
