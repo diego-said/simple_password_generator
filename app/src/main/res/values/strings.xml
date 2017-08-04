@@ -19,4 +19,6 @@
     <string name="button_cancel">Cancel</string>
     <string name="save_passwords">Save passwords</string>
     <string name="save_message">Passwords saved</string>
+    <string name="keep_config">Keep last configuration</string>
+    <string name="no_repeat">No repeating passwords</string>
 </resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <RelativeLayout
+        android:id="@+id/options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_default"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp">
+
+        <CheckBox
+            android:id="@+id/checkBoxKeepSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:onClick="checkBoxClickHandler"
+            android:text="@string/keep_config"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            android:layout_margin="16dp"/>
+
+        <CheckBox
+            android:id="@+id/checkBoxNoRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/checkBoxKeepSettings"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:checked="false"
+            android:onClick="checkBoxClickHandler"
+            android:text="@string/no_repeat"
+            android:textAllCaps="true"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_below="@+id/checkBoxNoRepeat"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

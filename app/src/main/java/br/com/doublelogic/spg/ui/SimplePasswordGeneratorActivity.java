@@ -18,6 +18,7 @@ public class SimplePasswordGeneratorActivity extends Activity {
 
 	private Fragment passwordGeneratorFragment;
 	private Fragment savePasswordFragment;
+	private Fragment settingsFragment;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class SimplePasswordGeneratorActivity extends Activity {
 		
 		passwordGeneratorFragment = new PasswordGeneratorFragment();
 		savePasswordFragment = new SavePasswordFragment();
+		settingsFragment = new SettingsFragment();
 		
 		buttonPasswords = (ImageButton) findViewById(R.id.buttonPassword);
 		buttonPasswords.setSelected(true);
@@ -67,7 +69,7 @@ public class SimplePasswordGeneratorActivity extends Activity {
 				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings_dark));
 				break;
 			case R.id.buttonSettings:
-				showFragment(passwordGeneratorFragment);
+				showFragment(settingsFragment);
 				buttonPasswords.setSelected(false);
 				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_login_dark));
 				buttonSaves.setSelected(false);
