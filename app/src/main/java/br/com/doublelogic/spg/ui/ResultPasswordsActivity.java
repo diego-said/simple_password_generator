@@ -61,7 +61,11 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 			finish();
 		}
 
-		generatePasswords();
+		if(passSettings.getPasswords().size() > 0) {
+			onPostExecute(passSettings);
+		} else {
+			generatePasswords();
+		}
 	}
 
 	private void loadUIReferences() {
@@ -164,14 +168,19 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 
 			final EditText input = new EditText(this);
 			input.setInputType(InputType.TYPE_CLASS_TEXT);
+			input.setText(passSettings.getName());
 			builder.setView(input);
 
 			builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					passSettings.setName(input.getText().toString());
+					if(passSettings.getId() > 0) {
+						dbHelper.removePasswords(String.valueOf(passSettings.getId()));
+					}
 					dbHelper.savePasswords(passSettings, passwords);
 					dialog.dismiss();
+					Toast.makeText(getApplicationContext(), getString(R.string.save_message), Toast.LENGTH_SHORT).show();
 				}
 			});
 			builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

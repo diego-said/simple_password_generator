@@ -18,4 +18,5 @@
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
     <string name="save_passwords">Save passwords</string>
+    <string name="save_message">Passwords saved</string>
 </resources>

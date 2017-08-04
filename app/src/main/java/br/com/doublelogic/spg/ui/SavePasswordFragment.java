@@ -3,6 +3,7 @@ package br.com.doublelogic.spg.ui;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import br.com.doublelogic.spg.bean.PasswordSettings;
 import br.com.doublelogic.spg.db.PasswordsDbHelper;
 
 public class SavePasswordFragment extends Fragment implements SavePasswordsListener {
+
+    private static final int REQUEST_RESULT_PASSWORDS = 2;
 
     private ListView listViewPasswords;
 
@@ -96,6 +99,16 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
     }
 
     private void editClickHandler(View v) {
+        final List<PasswordSettings> passwords = adapter.getSelectedPasswords();
+        if(passwords != null && passwords.size() > 0) {
+            PasswordSettings passwordSettings = passwords.get(0);
+
+            Intent requestResult = new Intent(getActivity(), ResultPasswordsActivity.class);
+            requestResult.putExtra(PasswordSettings.KEY, passwordSettings);
+            startActivityForResult(requestResult, REQUEST_RESULT_PASSWORDS);
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.no_password), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void deleteClickHandler(View v) {
