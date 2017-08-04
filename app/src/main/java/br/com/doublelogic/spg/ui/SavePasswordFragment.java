@@ -1,6 +1,8 @@
 package br.com.doublelogic.spg.ui;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -16,6 +19,7 @@ import br.com.doublelogic.spg.adapter.SavePasswordsAdapter;
 import br.com.doublelogic.spg.adapter.loader.SavePasswordsListener;
 import br.com.doublelogic.spg.adapter.loader.SavePasswordsLoader;
 import br.com.doublelogic.spg.bean.PasswordSettings;
+import br.com.doublelogic.spg.db.PasswordsDbHelper;
 
 public class SavePasswordFragment extends Fragment implements SavePasswordsListener {
 
@@ -95,8 +99,37 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
     }
 
     private void deleteClickHandler(View v) {
-    }
+        final List<PasswordSettings> passwords = adapter.getSelectedPasswords();
+        if(passwords != null && passwords.size() > 0) {
 
+            AlertDialog deleteDialogBox =new AlertDialog.Builder(getActivity())
+            //.setTitle("Delete")
+            .setMessage(R.string.confirm_remove_passwords)
+            //.setIcon(R.drawable.ic_menu_delete)
+
+            .setPositiveButton(R.string.button_yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String[] ids = new String[passwords.size()];
+                    for(int i=0; i<passwords.size(); i++) {
+                        ids[i] = String.valueOf(passwords.get(i).getId());
+                    }
+                    PasswordsDbHelper dbHelper = new PasswordsDbHelper(getActivity());
+                    dbHelper.removePasswords(ids);
+                    dialog.dismiss();
+                    loadPasswords();
+                }
+            })
+
+            .setNegativeButton(R.string.button_no, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).create();
+            deleteDialogBox.show();
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.no_password), Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onPreExecute() {

@@ -170,4 +170,29 @@ public class PasswordsDbHelper extends DatabseHelper {
 		}
 	}
 
+	public void removePasswords(String... passwordIds) {
+		SQLiteDatabase db = null;
+		try {
+			if(passwordIds != null && passwordIds.length > 0) {
+				db = getWritableDatabase();
+				StringBuilder whereClause = new StringBuilder(TABLE_PASSWORD_SETTINGS.COLUMN_ID);
+				whereClause.append(" in (");
+				for(int i=0; i<passwordIds.length; i++) {
+					whereClause.append("?,");
+				}
+				whereClause.deleteCharAt(whereClause.length() -1);
+				whereClause.append(")");
+
+				db.delete(TABLE_PASSWORD_SETTINGS.TABLE_NAME, whereClause.toString(), passwordIds);
+			}
+		} catch (final Exception e) {
+			Log.w(TAG, e.getMessage(), e);
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+			close();
+		}
+	}
+
 }

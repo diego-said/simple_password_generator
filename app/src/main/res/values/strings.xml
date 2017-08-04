@@ -12,4 +12,7 @@
     <string name="copy_message">Passwords copied</string>
 	<string name="loading_message">Please wait&#8230;</string>
 	<string name="no_password">Please, select at least one password</string>
+    <string name="confirm_remove_passwords">Do you want to remove these passwords?</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
 </resources>

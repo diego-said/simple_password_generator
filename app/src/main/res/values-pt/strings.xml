@@ -10,5 +10,8 @@
     <string name="copy">Copiar</string>
     <string name="copy_all">Copiar tudo</string>
     <string name="copy_message">Senhas copiadas</string>
+    <string name="confirm_remove_passwords">Deseja remover essas senhas?</string>
+    <string name="button_yes">Sim</string>
+    <string name="button_no">Não</string>
 
 </resources>
