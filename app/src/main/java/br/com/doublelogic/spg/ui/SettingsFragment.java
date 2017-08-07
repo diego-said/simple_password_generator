@@ -17,13 +17,13 @@ public class SettingsFragment extends Fragment {
     private CheckBox checkBoxKeepSettings;
     private CheckBox checkBoxNoRepeat;
 
-    private SharedPreferences settings;
+    private SharedPreferences preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.settings, container, false);
 
-        settings = getActivity().getSharedPreferences(Preferences.SETTINGS.name(), Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences(Preferences.SETTINGS.name(), Context.MODE_PRIVATE);
 
         loadUIReferences(view);
 
@@ -32,7 +32,7 @@ public class SettingsFragment extends Fragment {
 
     private void loadUIReferences(View view) {
         checkBoxKeepSettings = (CheckBox) view.findViewById(R.id.checkBoxKeepSettings);
-        checkBoxKeepSettings.setChecked(settings.getBoolean(Preferences.KEEP_LAST_CONFIG.name(), false));
+        checkBoxKeepSettings.setChecked(preferences.getBoolean(Preferences.KEEP_LAST_CONFIG.name(), false));
         checkBoxKeepSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +41,7 @@ public class SettingsFragment extends Fragment {
         });
 
         checkBoxNoRepeat = (CheckBox) view.findViewById(R.id.checkBoxNoRepeat);
-        checkBoxNoRepeat.setChecked(settings.getBoolean(Preferences.NO_REPEAT.name(), false));
+        checkBoxNoRepeat.setChecked(preferences.getBoolean(Preferences.NO_REPEAT.name(), false));
         checkBoxNoRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +51,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void savePreferences() {
-        SharedPreferences.Editor editor = settings.edit();
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(Preferences.KEEP_LAST_CONFIG.name(), checkBoxKeepSettings.isChecked());
         editor.putBoolean(Preferences.NO_REPEAT.name(), checkBoxNoRepeat.isChecked());
         editor.commit();

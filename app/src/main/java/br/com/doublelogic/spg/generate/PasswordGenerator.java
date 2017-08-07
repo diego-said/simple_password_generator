@@ -15,7 +15,7 @@ public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Bool
 	private PasswordSettings passwordSettings;
 
 	public PasswordGenerator() {
-		listeners = new ArrayList<PasswordGeneratorListener>();
+		listeners = new ArrayList<>();
 	}
 
 	@Override

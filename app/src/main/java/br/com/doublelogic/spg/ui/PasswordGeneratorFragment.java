@@ -1,7 +1,9 @@
 package br.com.doublelogic.spg.ui;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import br.com.doublelogic.spg.R;
 import br.com.doublelogic.spg.bean.PasswordSettings;
+import br.com.doublelogic.spg.common.PasswordPreferences;
+import br.com.doublelogic.spg.common.Preferences;
 import br.com.doublelogic.spg.common.RegExDefaults;
 
 public class PasswordGeneratorFragment extends Fragment {
@@ -31,13 +35,23 @@ public class PasswordGeneratorFragment extends Fragment {
 	
 	private Button buttonGenerate;
 
+	private SharedPreferences preferences;
+	private SharedPreferences passwordPreferences;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.generate_passwords, container, false);
 
+		preferences = getActivity().getSharedPreferences(Preferences.SETTINGS.name(), Context.MODE_PRIVATE);
+		passwordPreferences = getActivity().getSharedPreferences(PasswordPreferences.LAST_CONFIG.name(), Context.MODE_PRIVATE);
+
 		loadUIReferences(view);
 
 		passSettings = new PasswordSettings();
+
+		if(preferences.getBoolean(Preferences.KEEP_LAST_CONFIG.name(), false)) {
+			loadLastConfig();
+		}
 
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		
@@ -119,6 +133,10 @@ public class PasswordGeneratorFragment extends Fragment {
 				passSettings.setRegEx(regEx);
 			}
 
+			if(preferences.getBoolean(Preferences.KEEP_LAST_CONFIG.name(), false)) {
+				saveConfig();
+			}
+
 			Intent requestResult = new Intent(getActivity(), ResultPasswordsActivity.class);
 			requestResult.putExtra(PasswordSettings.KEY, passSettings);
 			startActivityForResult(requestResult, REQUEST_RESULT_PASSWORDS);
@@ -126,4 +144,44 @@ public class PasswordGeneratorFragment extends Fragment {
 			break;
 		}
 	}
+
+	private void loadLastConfig() {
+		int length = passwordPreferences.getInt(PasswordPreferences.LENGTH.name(), passSettings.getLength());
+		int quantity = passwordPreferences.getInt(PasswordPreferences.QUANTITY.name(), passSettings.getQuantity());
+		boolean letters = passwordPreferences.getBoolean(PasswordPreferences.LETTERS.name(), true);
+		boolean numbers = passwordPreferences.getBoolean(PasswordPreferences.NUMBERS.name(), true);
+		boolean specialChar = passwordPreferences.getBoolean(PasswordPreferences.SPECIAL_CHAR.name(), false);
+		String regEx = passwordPreferences.getString(PasswordPreferences.REGEX.name(), passSettings.getRegEx());
+
+		passSettings.setLength(length);
+		passSettings.setQuantity(quantity);
+		passSettings.setRegEx(regEx);
+
+		editTextLength.setText(String.valueOf(length));
+		editTextQuantity.setText(String.valueOf(quantity));
+		editTextRegEx.setText(String.valueOf(regEx));
+
+		checkBoxLetters.setChecked(letters);
+		checkBoxNumbers.setChecked(numbers);
+		checkBoxSpecialChar.setChecked(specialChar);
+	}
+
+	private void saveConfig() {
+		int length = Integer.parseInt(editTextLength.getText().toString());
+		int quantity = Integer.parseInt(editTextQuantity.getText().toString());
+		boolean letters = checkBoxLetters.isChecked();
+		boolean numbers = checkBoxNumbers.isChecked();
+		boolean specialChar = checkBoxSpecialChar.isChecked();
+		String regEx = editTextRegEx.getText().toString().trim();
+
+		SharedPreferences.Editor editor = passwordPreferences.edit();
+		editor.putInt(PasswordPreferences.LENGTH.name(), length);
+		editor.putInt(PasswordPreferences.QUANTITY.name(), quantity);
+		editor.putBoolean(PasswordPreferences.LETTERS.name(), letters);
+		editor.putBoolean(PasswordPreferences.NUMBERS.name(), numbers);
+		editor.putBoolean(PasswordPreferences.SPECIAL_CHAR.name(), specialChar);
+		editor.putString(PasswordPreferences.REGEX.name(), regEx);
+		editor.commit();
+	}
+
 }
