@@ -36,6 +36,8 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
     private View loadingBar;
     private View loadingText;
 
+    private View textViewNoPasswords;
+
     private SavePasswordsAdapter adapter;
     private SavePasswordsLoader loader;
 
@@ -88,6 +90,9 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
 
         loadingBar = view.findViewById(R.id.loadingBar);
         loadingText = view.findViewById(R.id.loadingText);
+
+        textViewNoPasswords = view.findViewById(R.id.textViewNoPasswords);
+        textViewNoPasswords.setVisibility(View.GONE);
 	}
 
     private void refreshClickHandler(View v) {
@@ -114,12 +119,8 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
     private void deleteClickHandler(View v) {
         final List<PasswordSettings> passwords = adapter.getSelectedPasswords();
         if(passwords != null && passwords.size() > 0) {
-
             AlertDialog deleteDialogBox =new AlertDialog.Builder(getActivity())
-            //.setTitle("Delete")
             .setMessage(R.string.confirm_remove_passwords)
-            //.setIcon(R.drawable.ic_menu_delete)
-
             .setPositiveButton(R.string.button_yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     String[] ids = new String[passwords.size()];
@@ -132,7 +133,6 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
                     loadPasswords();
                 }
             })
-
             .setNegativeButton(R.string.button_no, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -148,6 +148,7 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
     public void onPreExecute() {
         loadingBar.setVisibility(View.VISIBLE);
         loadingText.setVisibility(View.VISIBLE);
+        textViewNoPasswords.setVisibility(View.GONE);
 
         if(adapter != null) {
             adapter.setSavePasswords(null);
@@ -161,6 +162,10 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
 
         if(adapter != null) {
             adapter.setSavePasswords(passwordsList);
+        }
+
+        if(passwordsList.size() == 0) {
+            textViewNoPasswords.setVisibility(View.VISIBLE);
         }
     }
 
