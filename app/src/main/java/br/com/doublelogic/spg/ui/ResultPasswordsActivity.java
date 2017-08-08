@@ -112,7 +112,7 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 	}
 
 	private void generatePasswords() {
-		passwordGenerator = new PasswordGenerator();
+		passwordGenerator = new PasswordGenerator(this);
 		passwordGenerator.addListener(this);
 		passwordGenerator.execute(passSettings);
 	}
