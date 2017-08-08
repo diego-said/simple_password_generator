@@ -1,5 +1,6 @@
 package br.com.doublelogic.spg.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -24,7 +25,7 @@ import br.com.doublelogic.spg.db.PasswordsDbHelper;
 
 public class SavePasswordFragment extends Fragment implements SavePasswordsListener {
 
-    private static final int REQUEST_RESULT_PASSWORDS = 2;
+    private static final int EDIT_PASSWORDS = 2;
 
     private ListView listViewPasswords;
 
@@ -105,7 +106,7 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
 
             Intent requestResult = new Intent(getActivity(), ResultPasswordsActivity.class);
             requestResult.putExtra(PasswordSettings.KEY, passwordSettings);
-            startActivityForResult(requestResult, REQUEST_RESULT_PASSWORDS);
+            startActivityForResult(requestResult, EDIT_PASSWORDS);
         } else {
             Toast.makeText(getActivity(), getString(R.string.no_password), Toast.LENGTH_SHORT).show();
         }
@@ -161,6 +162,13 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
 
         if(adapter != null) {
             adapter.setSavePasswords(passwordsList);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EDIT_PASSWORDS) {
+            loadPasswords();
         }
     }
 
