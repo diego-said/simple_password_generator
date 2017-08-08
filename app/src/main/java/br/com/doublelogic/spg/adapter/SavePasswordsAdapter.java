@@ -83,12 +83,30 @@ public class SavePasswordsAdapter extends BaseAdapter {
 
         final TextView passwordIdent = (TextView) convertView.findViewById(R.id.textViewPasswordIdent);
         passwordIdent.setText(password.getName());
+        passwordIdent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkboxPassword.setChecked(!checkboxPassword.isChecked());
+            }
+        });
 
         final TextView passwordDesc = (TextView) convertView.findViewById(R.id.textViewPasswordDesc);
         passwordDesc.setText(String.valueOf(password.getPasswords().size()));
+        passwordDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkboxPassword.setChecked(!checkboxPassword.isChecked());
+            }
+        });
 
         final TextView passwordRegex = (TextView) convertView.findViewById(R.id.textViewPasswordRegex);
         passwordRegex.setText(password.getRegEx());
+        passwordRegex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkboxPassword.setChecked(!checkboxPassword.isChecked());
+            }
+        });
 
         return convertView;
     }
