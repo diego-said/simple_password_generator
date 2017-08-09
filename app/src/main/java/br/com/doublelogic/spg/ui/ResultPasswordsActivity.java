@@ -215,6 +215,12 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 		loadingBar.setVisibility(View.VISIBLE);
 		loadingText.setVisibility(View.VISIBLE);
 
+		buttonRefresh.setEnabled(false);
+		buttonSelectAll.setEnabled(false);
+		buttonCopy.setEnabled(false);
+		buttonMail.setEnabled(false);
+		buttonSave.setEnabled(false);
+
 		if(adapter != null) {
 			adapter.setPasswordSettings(null);
 			adapter.notifyDataSetChanged();
@@ -224,6 +230,12 @@ public class ResultPasswordsActivity extends Activity implements PasswordGenerat
 	public void onPostExecute(PasswordSettings p) {
 		loadingBar.setVisibility(View.GONE);
 		loadingText.setVisibility(View.GONE);
+
+		buttonRefresh.setEnabled(true);
+		buttonSelectAll.setEnabled(true);
+		buttonCopy.setEnabled(true);
+		buttonMail.setEnabled(true);
+		buttonSave.setEnabled(true);
 
 		if(adapter != null) {
 			adapter.setPasswordSettings(p);

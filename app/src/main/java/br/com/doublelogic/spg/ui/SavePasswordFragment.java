@@ -150,6 +150,11 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
         loadingText.setVisibility(View.VISIBLE);
         textViewNoPasswords.setVisibility(View.GONE);
 
+        buttonRefresh.setEnabled(false);
+        buttonSelectAll.setEnabled(false);
+        buttonEdit.setEnabled(false);
+        buttonDelete.setEnabled(false);
+
         if(adapter != null) {
             adapter.setSavePasswords(null);
         }
@@ -159,6 +164,11 @@ public class SavePasswordFragment extends Fragment implements SavePasswordsListe
     public void onPostExecute(List<PasswordSettings> passwordsList) {
         loadingBar.setVisibility(View.GONE);
         loadingText.setVisibility(View.GONE);
+
+        buttonRefresh.setEnabled(true);
+        buttonSelectAll.setEnabled(true);
+        buttonEdit.setEnabled(true);
+        buttonDelete.setEnabled(true);
 
         if(adapter != null) {
             adapter.setSavePasswords(passwordsList);
