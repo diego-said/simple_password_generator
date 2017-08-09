@@ -1,5 +1,10 @@
 package br.com.doublelogic.spg.generate;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.SystemClock;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -8,9 +13,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import br.com.doublelogic.spg.bean.PasswordSettings;
 import br.com.doublelogic.spg.common.Preferences;
 
@@ -77,7 +79,9 @@ public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Bool
 
 		boolean noRepeat = preferences.getBoolean(Preferences.NO_REPEAT.name(), false);
 
-		while (password.length() != length) {
+		long startTime = SystemClock.uptimeMillis();
+
+		while (!abortExecution(startTime) && password.length() != length) {
 			char[] c = { (char) (32 + rand.nextInt(255)) };
 			result = er.matcher(new String(c));
 			if (result.matches()) {
@@ -92,8 +96,12 @@ public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Bool
 				}
 			}
 		}
-
 		return password.toString();
+	}
+
+	private boolean abortExecution(long startTime) {
+		long now = SystemClock.uptimeMillis();
+		return (now - startTime) / 1000 > 1;
 	}
 
 }
