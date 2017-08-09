@@ -10,5 +10,16 @@
     <string name="copy">Kopiera</string>
     <string name="copy_all">Kopiera alla</string>
     <string name="copy_message">Lösenorden kopieras</string>
-
+    <string name="loading_message">Vänta&#8230;</string>
+    <string name="no_password">Vänligen välj minst ett lösenord</string>
+    <string name="confirm_remove_passwords">Vill du ta bort dessa lösenord?</string>
+    <string name="button_yes">Ja</string>
+    <string name="button_no">Nej</string>
+    <string name="button_ok">Ok</string>
+    <string name="button_cancel">Annullera</string>
+    <string name="save_passwords">Spara lösenord</string>
+    <string name="save_message">Lösenorden sparas</string>
+    <string name="keep_config">Håll senaste konfigurationen</string>
+    <string name="no_repeat">Inga upprepade tecken</string>
+    <string name="no_save_passwords">Inga sparade lösenord</string>
 </resources>

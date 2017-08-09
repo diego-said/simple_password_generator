@@ -10,5 +10,16 @@
     <string name="copy">Kopioi</string>
     <string name="copy_all">Kopioi kaikki</string>
     <string name="copy_message">Salasanat kopioidaan</string>
-
+    <string name="loading_message">Odota&#8230;</string>
+    <string name="no_password">Valitse ainakin yksi salasana</string>
+    <string name="confirm_remove_passwords">Haluatko poistaa nämä salasanat?</string>
+    <string name="button_yes">Joo</string>
+    <string name="button_no">Ei</string>
+    <string name="button_ok">Kunnossa</string>
+    <string name="button_cancel">Peruuttaa</string>
+    <string name="save_passwords">Tallenna salasanat</string>
+    <string name="save_message">Salasanat tallennetaan</string>
+    <string name="keep_config">Pidä viimeinen kokoonpano</string>
+    <string name="no_repeat">Ei toistuvia merkkejä</string>
+    <string name="no_save_passwords">Ei tallennettuja salasanoja</string>
 </resources>

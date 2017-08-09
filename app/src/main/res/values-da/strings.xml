@@ -11,4 +11,16 @@
     <string name="copy_all">Kopiér Alle</string>
     <string name="copy_message">Adgangskoder kopieres</string>
 
+    <string name="loading_message">Vent venligst&#8230;</string>
+    <string name="no_password">Vælg venligst mindst én adgangskode</string>
+    <string name="confirm_remove_passwords">Vil du fjerne disse adgangskoder?</string>
+    <string name="button_yes">Ja</string>
+    <string name="button_no">Ingen</string>
+    <string name="button_ok">Okay</string>
+    <string name="button_cancel">Afbestille</string>
+    <string name="save_passwords">Gem adgangskoder</string>
+    <string name="save_message">Passwords gemt</string>
+    <string name="keep_config">Hold den sidste konfiguration</string>
+    <string name="no_repeat">Ingen gentagende tegn</string>
+    <string name="no_save_passwords">Ingen gemte adgangskoder</string>
 </resources>

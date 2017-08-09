@@ -10,5 +10,16 @@
     <string name="copy">Copier</string>
     <string name="copy_all">Copier tout</string>
     <string name="copy_message">Mots de passe copiés</string>
-
+    <string name="loading_message">S&apos;il vous plaît attendre&#8230;</string>
+    <string name="no_password">S&apos;il vous plaît sélectionner au moins un mot de passe</string>
+    <string name="confirm_remove_passwords">Vous voulez supprimer ces mots de passe?</string>
+    <string name="button_yes">Oui</string>
+    <string name="button_no">Pas</string>
+    <string name="button_ok">Ok</string>
+    <string name="button_cancel">Annuler</string>
+    <string name="save_passwords">Enregistrer les mots de passe</string>
+    <string name="save_message">Mots de passe enregistrés</string>
+    <string name="keep_config">Maintenir dernier réglage</string>
+    <string name="no_repeat">Pas de répétition de caractères</string>
+    <string name="no_save_passwords">Aucun mot de passe sauvegardé</string>
 </resources>

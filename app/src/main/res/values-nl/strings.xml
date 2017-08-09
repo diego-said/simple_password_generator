@@ -10,5 +10,16 @@
     <string name="copy">Kopiëren</string>
     <string name="copy_all">Alles kopiëren</string>
     <string name="copy_message">Wachtwoorden gekopieerd</string>
-
+    <string name="loading_message">Vennligst vent&#8230;</string>
+    <string name="no_password">Vennligst velg minst ett passord</string>
+    <string name="confirm_remove_passwords">Vil du fjerne disse passordene?</string>
+    <string name="button_yes">Ja</string>
+    <string name="button_no">Nei</string>
+    <string name="button_ok">Ok</string>
+    <string name="button_cancel">Avbryt</string>
+    <string name="save_passwords">Lagre passord</string>
+    <string name="save_message">Passord lagret</string>
+    <string name="keep_config">Hold siste konfigurasjon</string>
+    <string name="no_repeat">Ingen gjentatte tegn</string>
+    <string name="no_save_passwords">Ingen lagrede passord</string>
 </resources>

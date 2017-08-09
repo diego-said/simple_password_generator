@@ -10,5 +10,16 @@
     <string name="copy">копировать</string>
     <string name="copy_all">Копировать все</string>
     <string name="copy_message">Пароли скопировать</string>
-
+    <string name="loading_message">пожалуйста, подождите&#8230;</string>
+    <string name="no_password">Выберите хотя бы один пароль</string>
+    <string name="confirm_remove_passwords">Вы хотите удалить эти пароли?</string>
+    <string name="button_yes">да</string>
+    <string name="button_no">нет</string>
+    <string name="button_ok">ОК</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="save_passwords">Сохранять пароли</string>
+    <string name="save_message">Сохраненные пароли</string>
+    <string name="keep_config">Сохранять последнюю конфигурацию</string>
+    <string name="no_repeat">Нет повторяющихся символов</string>
+    <string name="no_save_passwords">Нет сохраненных паролей</string>
 </resources>
