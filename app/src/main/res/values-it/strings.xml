@@ -19,7 +19,7 @@
     <string name="button_cancel">Annulla</string>
     <string name="save_passwords">Salva le password</string>
     <string name="save_message">Password salvata</string>
-    <string name="keep_config">Conserva l&apos;ultima configurazione</string>
+    <string name="keep_config">Conserva l\&apos;ultima configurazione</string>
     <string name="no_repeat">Nessun carattere ripetuto</string>
     <string name="no_save_passwords">Nessuna password salvata</string>
 </resources>

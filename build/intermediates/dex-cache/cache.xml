@@ -2,6 +2,15 @@
 <items version="2" >
 
     <item
+        is-multidex="false"
+        jar="/Users/diegoalvessaidsimao/Desenv/Android/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="/Users/diegoalvessaidsimao/Desenv/Android/git/simple_password_generator/app/build/intermediates/pre-dexed/release/support-v4-18.0.0_deee8b0d73cd46b104cef59105aba8b7efb50db7.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/Users/diegoalvessaidsimao/Desenv/Android/git/simple_password_generator/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
@@ -25,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="4116a44852036bba81c6a24123d720f4ae374126">
+        sha1="bcee4439cefb80024bcf00aaceac57b3c2c3736f">
         <dex dex="/Users/diegoalvessaidsimao/Desenv/Android/git/simple_password_generator/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ba196a5c83209801ed37aacfeb778210b0eb5c81/classes.dex" />
     </item>
 

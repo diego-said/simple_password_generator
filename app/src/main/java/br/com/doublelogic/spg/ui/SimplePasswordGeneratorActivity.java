@@ -90,4 +90,8 @@ public class SimplePasswordGeneratorActivity extends Activity {
 		fragmentTransaction.commit();
 	}
 
+	@Override
+	public void onBackPressed() {
+		finish();
+	}
 }
