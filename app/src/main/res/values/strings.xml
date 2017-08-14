@@ -22,4 +22,5 @@
     <string name="keep_config">Keep last configuration</string>
     <string name="no_repeat">No repeating characters</string>
     <string name="no_save_passwords">No saved passwords</string>
+    <string name="show_reg_ex">Show regular expression</string>
 </resources>

@@ -33,16 +33,31 @@
             android:layout_below="@+id/checkBoxKeepSettings"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
             android:checked="false"
             android:onClick="checkBoxClickHandler"
             android:text="@string/no_repeat"
             android:textAllCaps="true"
             android:textSize="18sp" />
 
+        <CheckBox
+            android:id="@+id/checkBoxRegEx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/checkBoxNoRepeat"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:checked="false"
+            android:onClick="checkBoxClickHandler"
+            android:text="@string/show_reg_ex"
+            android:textAllCaps="true"
+            android:textSize="18sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="16dp"
-            android:layout_below="@+id/checkBoxNoRepeat"/>
+            android:layout_below="@+id/checkBoxRegEx"/>
 
     </RelativeLayout>
 

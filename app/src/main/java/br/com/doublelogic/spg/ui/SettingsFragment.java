@@ -16,6 +16,7 @@ public class SettingsFragment extends Fragment {
 
     private CheckBox checkBoxKeepSettings;
     private CheckBox checkBoxNoRepeat;
+    private CheckBox checkBoxRegEx;
 
     private SharedPreferences preferences;
 
@@ -48,12 +49,22 @@ public class SettingsFragment extends Fragment {
                 savePreferences();
             }
         });
+
+        checkBoxRegEx = (CheckBox) view.findViewById(R.id.checkBoxRegEx);
+        checkBoxRegEx.setChecked(preferences.getBoolean(Preferences.SHOW_REG_EX.name(), false));
+        checkBoxRegEx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                savePreferences();
+            }
+        });
     }
 
     private void savePreferences() {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(Preferences.KEEP_LAST_CONFIG.name(), checkBoxKeepSettings.isChecked());
         editor.putBoolean(Preferences.NO_REPEAT.name(), checkBoxNoRepeat.isChecked());
+        editor.putBoolean(Preferences.SHOW_REG_EX.name(), checkBoxRegEx.isChecked());
         editor.commit();
     }
 
