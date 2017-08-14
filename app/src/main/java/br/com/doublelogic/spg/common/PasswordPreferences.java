@@ -1,9 +1,5 @@
 package br.com.doublelogic.spg.common;
 
-/**
- * Created by diegoalvessaidsimao on 07/08/17.
- */
-
 public enum PasswordPreferences {
 
     LAST_CONFIG,
@@ -11,6 +7,7 @@ public enum PasswordPreferences {
     LENGTH,
     QUANTITY,
     LETTERS,
+    SMALL_LETTERS,
     NUMBERS,
     SPECIAL_CHAR,
     REGEX;

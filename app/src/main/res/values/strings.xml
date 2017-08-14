@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Simple Password Generator</string>
-    <string name="letters">Letters</string>
+    <string name="letters">Capital Letters</string>
+    <string name="small_letters">Small Letters</string>
     <string name="numbers">Numbers</string>
     <string name="special_chars">Special characters</string>
     <string name="length">Length</string>
