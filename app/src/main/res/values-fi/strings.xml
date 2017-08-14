@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Simple Password Generator</string>
-    <string name="letters">Kirjeet</string>
+    <string name="letters">Isot kirjaimet</string>
+    <string name="small_letters">Pienet kirjaimet</string>
     <string name="numbers">Numerot</string>
     <string name="special_chars">Erikoismerkit</string>
     <string name="length">Pituus</string>
@@ -22,4 +23,5 @@
     <string name="keep_config">Pidä viimeinen kokoonpano</string>
     <string name="no_repeat">Ei toistuvia merkkejä</string>
     <string name="no_save_passwords">Ei tallennettuja salasanoja</string>
+    <string name="show_reg_ex">Näytä säännöllinen lauseke</string>
 </resources>

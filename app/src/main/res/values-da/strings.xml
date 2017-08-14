@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Simple Password Generator</string>
-    <string name="letters">Breve</string>
+    <string name="letters">Store bogstaver</string>
+    <string name="small_letters">Små bogstaver</string>
     <string name="numbers">Tal</string>
     <string name="special_chars">Specialtegn</string>
     <string name="length">Længde</string>
@@ -10,7 +11,6 @@
     <string name="copy">Kopier</string>
     <string name="copy_all">Kopiér Alle</string>
     <string name="copy_message">Adgangskoder kopieres</string>
-
     <string name="loading_message">Vent venligst&#8230;</string>
     <string name="no_password">Vælg venligst mindst én adgangskode</string>
     <string name="confirm_remove_passwords">Vil du fjerne disse adgangskoder?</string>
@@ -23,4 +23,5 @@
     <string name="keep_config">Hold den sidste konfiguration</string>
     <string name="no_repeat">Ingen gentagende tegn</string>
     <string name="no_save_passwords">Ingen gemte adgangskoder</string>
+    <string name="show_reg_ex">Vis regelmæssigt udtryk</string>
 </resources>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Simple Password Generator</string>
-    <string name="letters">Letters</string>
+    <string name="letters">Großbuchstaben</string>
+    <string name="small_letters">Kleinbuchstaben</string>
     <string name="numbers">Numbers</string>
     <string name="special_chars">Spezielle Zeichen</string>
     <string name="length">Länge</string>
@@ -22,4 +23,5 @@
     <string name="keep_config">Letzte Konfiguration beibehalten</string>
     <string name="no_repeat">Keine Wiederholungszeichen</string>
     <string name="no_save_passwords">Keine gespeicherten passwörter</string>
+    <string name="show_reg_ex">Zeigen Sie regelmäßigen Ausdruck</string>
 </resources>
