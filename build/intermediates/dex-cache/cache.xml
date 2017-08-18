@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="a3f5cd706d917e50c5928d751a317503e41aa100">
+        sha1="a7b9d4742ea75305525af3dbac4e6ca849ea050b">
         <dex dex="/Users/diegoalvessaidsimao/Desenv/Android/git/simple_password_generator/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ba196a5c83209801ed37aacfeb778210b0eb5c81/classes.dex" />
     </item>
 
