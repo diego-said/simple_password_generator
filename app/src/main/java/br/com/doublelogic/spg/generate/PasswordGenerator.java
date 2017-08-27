@@ -18,15 +18,12 @@ import br.com.doublelogic.spg.common.Preferences;
 
 public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Boolean> {
 
-	private final Context context;
-
 	private final SharedPreferences preferences;
 
 	private final List<PasswordGeneratorListener> listeners;
 	private PasswordSettings passwordSettings;
 
 	public PasswordGenerator(Context context) {
-		this.context = context;
 		preferences = context.getSharedPreferences(Preferences.SETTINGS.name(), Context.MODE_PRIVATE);
 		listeners = new ArrayList<>();
 	}
@@ -49,9 +46,15 @@ public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Bool
 		passwordSettings = params[0];
 		passwordSettings.clearPasswords();
 
-		for (int i = 0; i < passwordSettings.getQuantity(); i++) {
+		Set<String> uniquePasswords = new HashSet<>();
+		long startTime = SystemClock.uptimeMillis();
+
+		while(!abortExecution(startTime, 60) && uniquePasswords.size() < passwordSettings.getQuantity()) {
 			String password = generatePassword(passwordSettings.getRegEx(), passwordSettings.getLength());
-			passwordSettings.addPassword(password);
+			if(!uniquePasswords.contains(password)) {
+				uniquePasswords.add(password);
+				passwordSettings.addPassword(password);
+			}
 		}
 		return true;
 	}
@@ -73,7 +76,7 @@ public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Bool
 		Random rand = new Random(System.currentTimeMillis());
 
 		Pattern er = Pattern.compile(regex);
-		Matcher result = null;
+		Matcher result;
 
 		Set<Character> chars = new HashSet<>();
 
@@ -81,7 +84,7 @@ public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Bool
 
 		long startTime = SystemClock.uptimeMillis();
 
-		while (!abortExecution(startTime) && password.length() != length) {
+		while (!abortExecution(startTime, 1) && password.length() != length) {
 			char[] c = { (char) (32 + rand.nextInt(255)) };
 			result = er.matcher(new String(c));
 			if (result.matches()) {
@@ -99,9 +102,9 @@ public class PasswordGenerator extends AsyncTask<PasswordSettings, Integer, Bool
 		return password.toString();
 	}
 
-	private boolean abortExecution(long startTime) {
+	private boolean abortExecution(long startTime, long limit) {
 		long now = SystemClock.uptimeMillis();
-		return (now - startTime) / 1000 > 1;
+		return (now - startTime) / 1000 > limit;
 	}
 
 }
