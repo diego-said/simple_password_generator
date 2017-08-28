@@ -2,23 +2,21 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- pressed -->
-
-    <item android:drawable="@drawable/ic_menu_copy_holo_dark_active" android:state_pressed="true"/>
+    <item android:drawable="@drawable/ic_copy_green" android:state_pressed="true"/>
 
     <!-- focused/not selected -->
-
-    <item android:drawable="@drawable/ic_menu_copy_holo_dark_active" android:state_focused="true" android:state_selected="false"/>
+    <item android:drawable="@drawable/ic_copy_green" android:state_focused="true" android:state_selected="false"/>
 
     <!-- focused/selected -->
-
-    <item android:drawable="@drawable/ic_menu_copy_holo_dark_active" android:state_focused="true" android:state_selected="true"/>
+    <item android:drawable="@drawable/ic_copy_green" android:state_focused="true" android:state_selected="true"/>
 
     <!-- selected -->
+    <item android:drawable="@drawable/ic_copy_green" android:state_selected="true"/>
 
-    <item android:drawable="@drawable/ic_menu_copy_holo_dark_active" android:state_selected="true"/>
+    <!-- disabled -->
+    <item android:drawable="@drawable/ic_copy_grey" android:state_enabled="false" />
 
     <!-- default -->
-
-    <item android:drawable="@drawable/ic_menu_copy_holo_dark"/>
+    <item android:drawable="@drawable/ic_copy_white"/>
 
 </selector>

@@ -14,11 +14,11 @@
         <ImageButton
             android:id="@+id/buttonPassword"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@drawable/tab_selector"
             android:gravity="center"
-            android:src="@drawable/ic_menu_login" />
+            android:src="@drawable/ic_lock_white" />
 
         <FrameLayout
             android:id="@+id/view_space"
@@ -30,12 +30,12 @@
         <ImageButton
             android:id="@+id/buttonSaves"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/tab_selector"
             android:gravity="center"
-            android:src="@drawable/ic_menu_find_holo_dark_dark" />
+            android:src="@drawable/ic_find_grey" />
 
         <FrameLayout
             android:id="@+id/view_space2"
@@ -47,12 +47,12 @@
         <ImageButton
             android:id="@+id/buttonSettings"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/tab_selector"
             android:gravity="center"
-            android:src="@drawable/ic_action_settings_dark" />
+            android:src="@drawable/ic_settings_grey" />
     </LinearLayout>
 
     <ImageView

@@ -35,12 +35,12 @@ public class SimplePasswordGeneratorActivity extends Activity {
 
 		buttonSaves = (ImageButton) findViewById(R.id.buttonSaves);
 		buttonSaves.setSelected(false);
-		buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_find_holo_dark_dark));
+		buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_find_grey));
 		buttonSaves.setOnClickListener(listener);
 		
 		buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
 		buttonSettings.setSelected(false);
-		buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings_dark));
+		buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_settings_grey));
 		buttonSettings.setOnClickListener(listener);
 
 		showFragment(passwordGeneratorFragment);
@@ -52,30 +52,30 @@ public class SimplePasswordGeneratorActivity extends Activity {
 			case R.id.buttonPassword:
 				showFragment(passwordGeneratorFragment);
 				buttonPasswords.setSelected(true);
-				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_login));
+				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_lock_white));
 				buttonSaves.setSelected(false);
-				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_find_holo_dark_dark));
+				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_find_grey));
 				buttonSettings.setSelected(false);
-				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings_dark));
+				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_settings_grey));
 				break;
 
 			case R.id.buttonSaves:
 				showFragment(savePasswordFragment);
 				buttonPasswords.setSelected(false);
-				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_login_dark));
+				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_lock_grey));
 				buttonSaves.setSelected(true);
-				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_find_holo_dark));
+				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_find_white));
 				buttonSettings.setSelected(false);
-				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings_dark));
+				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_settings_grey));
 				break;
 			case R.id.buttonSettings:
 				showFragment(settingsFragment);
 				buttonPasswords.setSelected(false);
-				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_login_dark));
+				buttonPasswords.setImageDrawable(getResources().getDrawable(R.drawable.ic_lock_grey));
 				buttonSaves.setSelected(false);
-				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_find_holo_dark_dark));
+				buttonSaves.setImageDrawable(getResources().getDrawable(R.drawable.ic_find_grey));
 				buttonSettings.setSelected(true);
-				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_settings));
+				buttonSettings.setImageDrawable(getResources().getDrawable(R.drawable.ic_settings_white));
 				break;	
 				
 			}

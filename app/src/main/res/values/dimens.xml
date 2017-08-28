@@ -5,4 +5,5 @@
     <integer name="quantity_min">5</integer>
     <integer name="quantity_max">500</integer>
     <integer name="quantity_default">10</integer>
+    <dimen name="toolbar_button_size">32dp</dimen>
 </resources>
